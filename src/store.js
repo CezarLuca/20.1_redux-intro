@@ -6,7 +6,13 @@ const initialState = {
     loanPurpose: "",
 };
 
-function reducer(state = initialState, action) {
+const initialStateCustomer = {
+    fullName: "",
+    nationalID: "",
+    createdAt: "",
+};
+
+function accountReducer(state = initialState, action) {
     switch (action.type) {
         case "account/deposit":
             return {
@@ -38,7 +44,9 @@ function reducer(state = initialState, action) {
     }
 }
 
-const store = createStore(reducer);
+function customerReducer(state = initialStateCustomer, action) {}
+
+const store = createStore(accountReducer);
 
 // store.dispatch({ type: "account/deposit", payload: 500 });
 // console.log("Hey Redux, what's the state?");
@@ -83,3 +91,14 @@ console.log(store.getState());
 
 store.dispatch(payLoan());
 console.log(store.getState());
+
+function createCustomer(fullName, nationalID) {
+    return {
+        type: "customer/create",
+        payload: { fullName, nationalID, createdAt: new Date().toISOString() },
+    };
+}
+
+function updateName(fullName) {
+    return { type: "customer/updateName", payload: fullName };
+}

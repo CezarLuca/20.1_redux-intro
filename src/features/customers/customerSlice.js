@@ -1,6 +1,6 @@
 const initialStateCustomer = {
     fullName: "",
-    nationalID: "",
+    nationalId: "",
     createdAt: "",
 };
 
@@ -10,7 +10,7 @@ export default function customerReducer(state = initialStateCustomer, action) {
             return {
                 ...state,
                 fullName: action.payload.fullName,
-                nationalID: action.payload.nationalID,
+                nationalId: action.payload.nationalId,
                 createdAt: action.payload.createdAt,
             };
         case "customer/updateName":
@@ -23,10 +23,10 @@ export default function customerReducer(state = initialStateCustomer, action) {
     }
 }
 
-export function createCustomer(fullName, nationalID) {
+export function createCustomer(fullName, nationalId) {
     return {
-        type: "customer/create",
-        payload: { fullName, nationalID, createdAt: new Date().toISOString() },
+        type: "customer/createCustomer",
+        payload: { fullName, nationalId, createdAt: new Date().toISOString() },
     };
 }
 

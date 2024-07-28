@@ -26,3 +26,18 @@
 // Versioning: Easier to manage versions and dependencies within the scope.
 // In summary, the main difference is organizational: scoped packages provide a way to group related packages together
 //  under a common namespace, which can help with managing dependencies and avoiding naming conflicts.
+/*
+
+    What is REDUX TOOLKIT?
+
+    REDUX TOOLKIT:
+        - The modern and preferred way to write Redux logic.
+        - An opininated approach, forcing us to use Redux best practices.
+        - 100% compatible with existing Redux code, allowing us to use them together.
+        - Allows us to write a lot less code to achieve the same result (less boilerplate).
+        - Gives us 3 big features (but there are more):
+            - We can write code that "mutates" state inside reducers (will be converted to immutable logic behind the 
+            scenes by "Immer" library).
+            - Action creators are automatically generated for us.
+            - Automatic setup of thunk middleware and DevTools.
+*/

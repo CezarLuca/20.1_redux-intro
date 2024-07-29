@@ -23,7 +23,9 @@ function AccountOperations() {
     function handleDeposit() {
         if (!depositAmount) return;
 
-        dispatch(deposit(depositAmount, currency));
+        //! Activate Later
+        // dispatch(deposit(depositAmount, currency)); // Dissabled for testing
+        dispatch(deposit(depositAmount)); // Enabled for testing
         setDepositAmount("");
         setCurrency("USD");
     }

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+// import { type } from "@testing-library/user-event/dist/type";
 
 const initialState = {
     balance: 0,
@@ -12,6 +13,7 @@ const accountSlice = createSlice({
     initialState,
     reducers: {
         deposit(state, action) {
+            state.isLoading = false;
             state.balance += action.payload;
         },
         withdraw(state, action) {
@@ -39,12 +41,34 @@ const accountSlice = createSlice({
             state.loan = 0;
             state.loanPurpose = "";
         },
+        convertingCurrency(state) {
+            state.isLoading = true;
+        },
     },
 });
 
 console.log(accountSlice);
 
-export const { deposit, withdraw, requestLoan, payLoan } = accountSlice.actions;
+// export const { deposit, withdraw, requestLoan, payLoan } = accountSlice.actions;
+export const { withdraw, requestLoan, payLoan } = accountSlice.actions;
+
+export function deposit(amount, currency) {
+    if (currency === "USD") return { type: "account/deposit", payload: amount };
+
+    return async function (dispatch, getState) {
+        dispatch({ type: "account/convertingCurrency" });
+        // API call to convert currency
+        const res = await fetch(
+            `https://api.frankfurter.app/latest?amount=${amount}&from=${currency}&to=USD`
+        );
+        const data = await res.json();
+        // console.log(data);
+        const convertedAmount = data.rates.USD;
+
+        // return action
+        dispatch({ type: "account/deposit", payload: convertedAmount });
+    };
+}
 
 export default accountSlice.reducer;
 
